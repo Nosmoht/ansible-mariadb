@@ -1,0 +1,5 @@
+mariadb_package_name: mariadb-server
+mariadb_package_state: installed
+mariadb_service_name: mariadb
+mariadb_service_state: running
+mariadb_config_file: /etc/my.cnf
