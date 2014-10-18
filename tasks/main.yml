@@ -21,7 +21,7 @@
   - Restart MariaDB
 
 - name: Configure init-connect
-  ini_file: dest={{ mariadb_config_file }} section=mysqld option=init-connect value='SET NAMES utf8'
+  ini_file: dest={{ mariadb_config_file }} section=mysqld option=init-connect value="'SET NAMES utf8'"
   notify:
   - Restart MariaDB
 
