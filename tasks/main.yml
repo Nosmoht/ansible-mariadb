@@ -1,30 +1,27 @@
 ---
 - name: Install MariaDB
-  yum: name=mariadb-server state=installed
+  yum: name={{ mariadb_package_name }} state=installed
   when: ansible_os_family == "RedHat"
   notify:
   - Start MariaDB
-
+- name: Configure on boot
+  service: name={{ mariadb_service_name }} enabled={{ mariadb_service_enabled }}
 - name: Configure Default Storage Engine
   ini_file: dest={{ mariadb_config_file }} section=mysqld option=default-storage-engine value=innodb
   notify:
   - Restart MariaDB
-
 - name: Configure InnoDB
   ini_file: dest={{ mariadb_config_file }} section=mysqld option=innodb_file_per_table value=
   notify:
   - Restart MariaDB
-
 - name: Configure collation-server
   ini_file: dest={{ mariadb_config_file }} section=mysqld option=collation-server value=utf8_general_ci
   notify:
   - Restart MariaDB
-
 - name: Configure init-connect
   ini_file: dest={{ mariadb_config_file }} section=mysqld option=init-connect value="'SET NAMES utf8'"
   notify:
   - Restart MariaDB
-
 - name: Configure character-set-server
   ini_file: dest={{ mariadb_config_file }} section=mysqld option=character-set-server value=utf8
   notify:
