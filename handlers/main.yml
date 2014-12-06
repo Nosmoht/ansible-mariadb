@@ -1,15 +1,15 @@
 ---
-- name: Starting MariaDB
+- name: Start MariaDB
   service:
     name: '{{ mariadb_service_name }}'
     state: started
 
-- name: Stopping MariaDB
+- name: Stop MariaDB
   service:
     name: '{{ mariadb_service_name }}'
     state: stopped
 
-- name: Restarting MariaDB
+- name: Restart MariaDB
   service:
     name: '{{ mariadb_service_name }}'
     state: restarted
