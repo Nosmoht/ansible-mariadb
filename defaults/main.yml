@@ -5,3 +5,16 @@ mariadb_service_name: mariadb
 mariadb_service_state: running
 mariadb_service_enabled: true
 mariadb_config_file: /etc/my.cnf
+mariadb_config:
+- section: mysqld
+  params:
+  - name: default-storage-engine
+    value: innodb
+  - name: innodb_file_per_table
+    value: ''
+  - name: collation-server
+    value: utf8_general_ci
+  - name: init-connect
+    value: '''SET NAMES utf8'''
+  - name: character-set-server
+    value: utf8
