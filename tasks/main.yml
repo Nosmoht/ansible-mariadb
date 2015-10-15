@@ -1,7 +1,7 @@
 ---
-- name: Installing MariaDB
+- name: Ensure packages
   yum:
-    name: '{{ mariadb_package_name }}'
+    name: '{{ mariadb_package_names }}'
     state: installed
 
 - name: Configuring MariaDB
