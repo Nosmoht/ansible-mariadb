@@ -1,23 +1,6 @@
 ---
-- name: Ensure packages
-  yum:
-    name: '{{ mariadb_package_names }}'
-    state: installed
-
-- name: Configuring MariaDB
-  ini_file:
-    dest: '{{ mariadb_config_file }}'
-    section: '{{ item.0.section }}'
-    option: '{{ item.1.name }}'
-    value: '{{ item.1.value }}'
-  notify:
-  - Restart MariaDB
-  with_subelements:
-  - mariadb_config
-  - params
-
-- name: Starting MariaDB and configuring on boot startup
-  service:
-    name: '{{ mariadb_service_name }}'
-    state: started
-    enabled: '{{ mariadb_service_enabled }}'
+- include: install.yml
+- include: config.yml
+- include: service.yml
+- include: db.yml
+- include: user.yml

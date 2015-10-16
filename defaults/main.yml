@@ -1,7 +1,7 @@
 ---
 mariadb_package_names:
 - mariadb-server
-mariadb_package_state: installed
+mariadb_package_state: present
 mariadb_service_name: mariadb
 mariadb_service_state: running
 mariadb_service_enabled: true
@@ -19,3 +19,4 @@ mariadb_config:
     value: '''SET NAMES utf8'''
   - name: character-set-server
     value: utf8
+mariadb_dbs: []

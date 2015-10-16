@@ -1,0 +1,6 @@
+---
+- name: Ensure database
+  mysql_db:
+    name: '{{ item.name }}'
+    state: '{{ item.state | default(omit) }}'
+  with_items: mariadb_dbs

@@ -1,0 +1,6 @@
+---
+- name: Ensure service
+  service:
+    name: '{{ mariadb_service_name }}'
+    state: '{{ mariadb_service_state }}'
+    enabled: '{{ mariadb_service_enabled }}'

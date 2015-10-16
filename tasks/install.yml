@@ -1,0 +1,5 @@
+---
+- name: Ensure packages
+  yum:
+    name: '{{ mariadb_package_names }}'
+    state: '{{ mariadb_package_state }}'

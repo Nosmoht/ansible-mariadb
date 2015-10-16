@@ -1,0 +1,12 @@
+---
+- name: Ensure configuration
+  ini_file:
+    dest: '{{ mariadb_config_file }}'
+    section: '{{ item.0.section }}'
+    option: '{{ item.1.name }}'
+    value: '{{ item.1.value }}'
+  notify:
+  - restart mariadb
+  with_subelements:
+  - mariadb_config
+  - params
