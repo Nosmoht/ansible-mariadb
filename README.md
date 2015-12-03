@@ -3,6 +3,8 @@ mariadb
 
 # Introduction
 Ansible role to setup and configure MariaDB on RHEL based systems.
+Database can be ensured by providing they description via __mariadb_dbs__.
+Database users can be ensured by providing they description via __mariadb_users__.
 
 # Variables
 | Name | Description | Default |
@@ -15,6 +17,8 @@ Ansible role to setup and configure MariaDB on RHEL based systems.
 | mariadb_config_file | Configuration file | /etc/my.cnf |
 | mariadb_install_python_package | Boolean to define if Python packages should be installed | False |
 | mariadb_python_package_name | Name of package to install for Python support | MySQL-python |
+| mariadb_dbs | List of dictionaries of databases to ensure | [] |
+| mariadb_users | List of dictionaries of database users to ensure | [] |
 
 # Usage
 Install and start MariaDB using defaults
@@ -32,6 +36,32 @@ Install also with Python support.
     mariadb_install_python_package: True
 ```
 
+Install and setup a database called test
+```yaml
+- hosts: servers
+  roles:
+  - role: mariadb
+    mariadb_dbs:
+    - name: test
+```
+
+Install and import a database test from SQL file.
+Create a user test with permissions to access the test database from the database host.
+```yaml
+- hosts: servers
+  roles:
+  - role: mariadb
+    mariadb_dbs:
+    - name: test
+      state: import
+      src: /tmp/test.sql
+    mariadb_users:
+    - name: test
+      password: topsecret
+      host: 127.0.0.1
+      priv: '*.*:ALL'
+
+```
 
 # Author
 [Thomas Krahn](mailto:ntbc@gmx.net)
