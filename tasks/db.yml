@@ -1,14 +1,21 @@
 ---
-- name: Ensure SQL file
+- name: Ensure database
+  mysql_db:
+    name: '{{ item.name }}'
+    state: '{{ item.state | default("present") | replace("import", "present") }}'
+  with_items: mariadb_dbs
+
+- name: Ensure SQL file to import
   copy:
     src: '{{ item.src }}'
     dest: '{{ item.target }}'
   when: '"{{ item.state | default("present") }}" == "import"'
   with_items: mariadb_dbs
 
-- name: Ensure database
+- name: Ensure database import
   mysql_db:
-    name: '{% if item.state == "import" %}mysql{% else %}{{ item.name }}{% endif %}'
-    state: '{{ item.state | default(omit) }}'
-    target: '{{ item.target | default(omit) }}'
+    name: '{{ item.name }}'
+    state: '{{ item.state }}'
+    target: '{{ item.target }}'
+  when: item.state == "import"
   with_items: mariadb_dbs
