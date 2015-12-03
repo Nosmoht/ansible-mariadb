@@ -8,7 +8,7 @@
 
 - name: Ensure database
   mysql_db:
-    name: '{{ item.name }}'
+    name: '{% if item.state == "import" %}mysql{% else %}{{ item.name }}{% endif %}'
     state: '{{ item.state | default(omit) }}'
     target: '{{ item.target | default(omit) }}'
   with_items: mariadb_dbs
