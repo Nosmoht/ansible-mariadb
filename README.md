@@ -1,10 +1,17 @@
 mariadb
 =========
+- [Introduction](#introduction)
+- [Requirements](#requirements)
+- [Variables](#variables)
+- [Usage](#usage)
 
 # Introduction
 Ansible role to setup and configure MariaDB on RHEL based systems.
 Database can be ensured by providing they description via __mariadb_dbs__.
 Database users can be ensured by providing they description via __mariadb_users__.
+
+# Requirements
+- EPEL repository must be available on RHEL based systems.
 
 # Variables
 | Name | Description | Default |
