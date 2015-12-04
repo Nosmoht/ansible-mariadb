@@ -3,6 +3,7 @@
   mysql_db:
     name: '{{ item.name }}'
     state: '{{ item.state | default("present") | replace("import", "present") }}'
+    encoding: '{{ item.encoding | default(omit) }}'
   with_items: mariadb_dbs
 
 - name: Ensure SQL file to import
