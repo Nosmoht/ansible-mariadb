@@ -43,13 +43,14 @@ Install also with Python support.
     mariadb_install_python_package: True
 ```
 
-Install and setup a database called test
+Install and setup a database called test using utf8 encoding
 ```yaml
 - hosts: servers
   roles:
   - role: mariadb
     mariadb_dbs:
     - name: test
+      encoding: utf8
 ```
 
 Install and import a database test from SQL file.
