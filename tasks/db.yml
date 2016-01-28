@@ -18,5 +18,5 @@
     name: '{{ item.name }}'
     state: '{{ item.state }}'
     target: '{{ item.target }}'
-  when: item.state == "import"
+  when: item.state | default("present") == "import"
   with_items: mariadb_dbs
