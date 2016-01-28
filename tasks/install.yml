@@ -1,5 +1,6 @@
 ---
 - name: Ensure packages
   action: '{{ ansible_pkg_mgr }} name={{ item }} state={{ mariadb_package_state }}'
-  notify: restart mariadb
-  with_items: mariadb_package_names
+  with_items:
+  - '{{ mariadb_package_names }}'
+  - '{% if mariadb_install_python_package %}{{ mariadb_python_package_name }}{% else %}[]{% endif %}'

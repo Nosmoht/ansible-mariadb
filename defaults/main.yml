@@ -25,3 +25,6 @@ mariadb_config:
   - name: character-set-server
     value: utf8
 mariadb_dbs: []
+mariadb_users: []
+mariadb_install_python_package: False
+mariadb_python_package_name: MySQL-python

@@ -2,5 +2,21 @@
 - name: Ensure database
   mysql_db:
     name: '{{ item.name }}'
-    state: '{{ item.state | default(omit) }}'
+    state: '{{ item.state | default("present") | replace("import", "present") }}'
+    encoding: '{{ item.encoding | default(omit) }}'
+  with_items: mariadb_dbs
+
+- name: Ensure SQL file to import
+  copy:
+    src: '{{ item.src }}'
+    dest: '{{ item.target }}'
+  when: '"{{ item.state | default("present") }}" == "import"'
+  with_items: mariadb_dbs
+
+- name: Ensure database import
+  mysql_db:
+    name: '{{ item.name }}'
+    state: '{{ item.state }}'
+    target: '{{ item.target }}'
+  when: item.state == "import"
   with_items: mariadb_dbs
