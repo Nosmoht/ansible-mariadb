@@ -1,4 +1,18 @@
 ---
+- name: Check if configuration file exists
+  stat:
+    path: '{{ mariadb_config_file }}'
+  register: mariadb_config_file_stat
+
+- name: Ensure configuration file
+  file:
+    name: '{{ mariadb_config_file }}'
+    state: touch
+    owner: root
+    group: root
+    mode: '0644'
+  when: not mariadb_config_file_stat.stat.exists
+
 - name: Ensure configuration
   ini_file:
     dest: '{{ mariadb_config_file }}'

@@ -1,0 +1,9 @@
+---
+mariadb_repository_url: http://yum.mariadb.org/{{ mariadb_version }}/centos{{ ansible_distribution_major_version }}-{{ mariadb_repository_architecture }}
+mariadb_repository_template_file: MariaDB.repo.j2
+mariadb_repository_file_name: MariaDB.repo
+mariadb_package_names:
+- mariadb-server
+mariadb_service_name: mariadb
+mariadb_config_file_path: /etc
+mariadb_config_file_name: my.cnf

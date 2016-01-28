@@ -1,20 +1,25 @@
 ---
-mariadb_package_names:
-- mariadb-server
+mariadb_repository_state: absent
+mariadb_repository_architecture: '{% if ansible_architecture == "x86_64" %}amd64{% else %}x86{% endif %}'
+mariadb_version: 10.1
 mariadb_package_state: present
-mariadb_service_name: mariadb
 mariadb_service_state: running
 mariadb_service_enabled: true
-mariadb_config_file: /etc/my.cnf
+mariadb_bind_address: 0.0.0.0
+mariadb_default_storage_engine: innodb
+mariadb_collation_server: utf8_general_ci
+mariadb_config_file: '{{ mariadb_config_file_path }}/{{ mariadb_config_file_name }}'
 mariadb_config:
 - section: mysqld
   params:
+  - name: bind-address
+    value: '{{ mariadb_bind_address }}'
   - name: default-storage-engine
-    value: innodb
-  - name: innodb_file_per_table
-    value: ''
+    value: '{{ mariadb_default_storage_engine }}'
+#  - name: innodb_file_per_table
+#    value: ''
   - name: collation-server
-    value: utf8_general_ci
+    value: '{{ mariadb_collation_server }}'
   - name: init-connect
     value: '''SET NAMES utf8'''
   - name: character-set-server

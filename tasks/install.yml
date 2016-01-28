@@ -1,5 +1,5 @@
 ---
 - name: Ensure packages
-  yum:
-    name: '{{ mariadb_package_names }}'
-    state: '{{ mariadb_package_state }}'
+  action: '{{ ansible_pkg_mgr }} name={{ item }} state={{ mariadb_package_state }}'
+  notify: restart mariadb
+  with_items: mariadb_package_names

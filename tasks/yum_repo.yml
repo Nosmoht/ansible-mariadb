@@ -1,0 +1,8 @@
+---
+- name: Ensure repository
+  template:
+    src: '{{ mariadb_repository_template_file }}'
+    dest: '/etc/yum.repos.d/{{ mariadb_repository_file_name }}'
+    owner: root
+    group: root
+    mode: '0644'
