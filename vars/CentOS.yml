@@ -7,3 +7,4 @@ mariadb_package_names:
 mariadb_service_name: mariadb
 mariadb_config_file_path: /etc
 mariadb_config_file_name: my.cnf
+mariadb_python_package_name: MySQL-python
