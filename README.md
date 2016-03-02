@@ -11,6 +11,7 @@ Database can be ensured by providing they description via __mariadb_dbs__.
 Database users can be ensured by providing they description via __mariadb_users__.
 
 # Requirements
+- Ansible >= 2.0
 - EPEL repository must be available on RHEL based systems.
 
 # Variables
