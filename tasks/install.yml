@@ -5,4 +5,4 @@
     state: '{{ mariadb_package_state }}'
   with_items:
   - '{{ mariadb_package_names }}'
-  - '{% if mariadb_install_python_package %}{{ mariadb_python_package_name }}{% else %}[]{% endif %}'
+  - '{% if mariadb_install_python_package | default(false) %}{{ mariadb_python_package_name }}{% else %}[]{% endif %}'
