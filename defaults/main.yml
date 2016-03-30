@@ -8,22 +8,28 @@ mariadb_service_enabled: true
 mariadb_bind_address: 0.0.0.0
 mariadb_default_storage_engine: innodb
 mariadb_collation_server: utf8_general_ci
+mariadb_character_set_server: utf8
+mariadb_init_connect: "'SET NAMES utf8'"
 mariadb_config_file: '{{ mariadb_config_file_path }}/{{ mariadb_config_file_name }}'
 mariadb_config:
 - section: mysqld
-  params:
-  - name: bind-address
-    value: '{{ mariadb_bind_address }}'
-  - name: default-storage-engine
-    value: '{{ mariadb_default_storage_engine }}'
-#  - name: innodb_file_per_table
-#    value: ''
-  - name: collation-server
-    value: '{{ mariadb_collation_server }}'
-  - name: init-connect
-    value: '''SET NAMES utf8'''
-  - name: character-set-server
-    value: utf8
+  option: bind-address
+  value: '{{ mariadb_bind_address }}'
+- section: mysqld
+  option: default-storage-engine
+  value: '{{ mariadb_default_storage_engine }}'
+#- section: mysqld
+#  option: innodb_file_per_table
+#  value: ''
+- section: mysqld
+  option: collation-server
+  value: '{{ mariadb_collation_server }}'
+- section: mysqld
+  option: init-connect
+  value: '{{ mariadb_init_connect }}'
+- section: mysqld
+  option: character-set-server
+  value: '{{ mariadb_character_set_server }}'
 mariadb_dbs: []
 mariadb_users: []
 mariadb_install_python_package: False
