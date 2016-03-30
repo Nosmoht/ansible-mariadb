@@ -2,6 +2,6 @@
 mariadb_package_names:
 - mariadb-server
 mariadb_service_name: mysql
-mariadb_config_file_path: /etc/mysql/mariadb.conf.d
+mariadb_config_file_path: /etc/mysql/conf.d
 mariadb_config_file_name: mysqld.cnf
 mariadb_python_package_name: python-mysqldb
