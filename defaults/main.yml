@@ -33,3 +33,4 @@ mariadb_config:
 mariadb_dbs: []
 mariadb_users: []
 mariadb_install_python_package: False
+mariadb_flush_handlers: true
