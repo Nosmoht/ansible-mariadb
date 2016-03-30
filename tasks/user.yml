@@ -6,5 +6,4 @@
     password: '{{ item.password | default(omit) }}'
     priv: '{{ item.priv | default(omit) }}'
     state: '{{ item.state | default(omit) }}'
-  with_items: mariadb_users
-  when: mariadb_users is defined
+  with_items: '{{ mariadb_users | default([]) }}'
