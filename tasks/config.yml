@@ -23,4 +23,3 @@
   notify:
   - restart mariadb
   with_items: '{{ mariadb_config }}'
-  register: mariadb_config_file_set
