@@ -1,0 +1,7 @@
+---
+mariadb_package_names:
+- mariadb-server
+mariadb_service_name: mysql
+mariadb_config_file_path: /etc/mysql/mariadb.conf.d
+mariadb_config_file_name: 50-server.cnf
+mariadb_python_package_name: python-mysqldb
