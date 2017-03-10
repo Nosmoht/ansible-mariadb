@@ -20,6 +20,9 @@
 - include: config.yml
   tags: mariadb_config
 
+- meta: flush_handlers
+  when: '{{ mariadb_flush_handlers }}'
+
 - include: service.yml
   tags: mariadb_service
 
@@ -28,6 +31,3 @@
 
 - include: user.yml
   tags: mariadb_user
-
-- meta: flush_handlers
-  when: '{{ mariadb_flush_handlers }}'
