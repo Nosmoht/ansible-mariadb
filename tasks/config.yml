@@ -20,6 +20,8 @@
     option: '{{ item.option }}'
     value: '{{ item.value }}'
     state: '{{ item.state | default(omit) }}'
+  with_items:
+  - '{{ mariadb_config }}'
+  - '{% if mariadb_cluster %}{{ mariadb_cluster_config }}{% else %}[]{% endif %}'
   notify:
   - restart mariadb
-  with_items: '{{ mariadb_config }}'

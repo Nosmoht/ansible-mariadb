@@ -1,11 +1,9 @@
 ---
-mariadb_repository_state: absent
-mariadb_repository_architecture: '{% if ansible_architecture == "x86_64" %}amd64{% else %}x86{% endif %}'
 mariadb_version: 10.1
 mariadb_package_state: present
-mariadb_service_state: running
+mariadb_service_state: started
 mariadb_service_enabled: true
-mariadb_bind_address: 0.0.0.0
+mariadb_bind_address: 127.0.0.1
 mariadb_default_storage_engine: innodb
 mariadb_collation_server: utf8_general_ci
 mariadb_character_set_server: utf8
@@ -34,3 +32,49 @@ mariadb_dbs: []
 mariadb_users: []
 mariadb_install_python_package: False
 mariadb_flush_handlers: true
+mariadb_repository_state: absent
+mariadb_repository_architecture: '{% if ansible_architecture == "x86_64" %}amd64{% else %}x86{% endif %}'
+
+mariadb_cluster_nodes: []
+mariadb_cluster: '{{ mariadb_cluster_nodes | length > 0 }}'
+mariadb_cluster_wsrep_on: 'ON'
+mariadb_cluster_wsrep_provider: /usr/lib64/galera/libgalera_smm.so
+mariadb_cluster_wsrep_cluster_address: 'gcomm://{{ mariadb_cluster_nodes | join(",") }}'
+mariadb_cluster_wsrep_cluster_name: mariadb-cluster
+mariadb_cluster_wsrep_node_address: '{{ mariadb_bind_address }}'
+mariadb_cluster_wsrep_node_name: '{{ ansible_nodename }}'
+mariadb_cluster_wsrep_sst_method: rsync
+mariadb_cluster_binlog_format: row
+mariadb_cluster_default_storage_engine: InnoDB
+mariadb_cluster_innodb_autoinc_lock_mode: 2
+mariadb_cluster_config:
+- section: galera
+  option: wsrep_on
+  value: '{{ mariadb_cluster_wsrep_on }}'
+- section: galera
+  option: wsrep_provider
+  value: '{{ mariadb_cluster_wsrep_provider }}'
+- section: galera
+  option: wsrep_cluster_address
+  value: "'{{ mariadb_cluster_wsrep_cluster_address }}'"
+- section: galera
+  option: wsrep_cluster_name
+  value: "'{{ mariadb_cluster_wsrep_cluster_name }}'"
+- section: galera
+  option: wsrep_node_address
+  value: "'{{ mariadb_cluster_wsrep_node_address }}'"
+- section: galera
+  option: wsrep_node_name
+  value: "'{{ mariadb_cluster_wsrep_node_name }}'"
+- section: galera
+  option: wsrep_sst_method
+  value: '{{ mariadb_cluster_wsrep_sst_method }}'
+- section: galera
+  option: binlog_format
+  value: '{{ mariadb_cluster_binlog_format }}'
+- section: galera
+  option: default_storage_engine
+  value: '{{ mariadb_cluster_default_storage_engine }}'
+- section: galera
+  option: innodb_autoinc_lock_mode
+  value: '{{ mariadb_cluster_innodb_autoinc_lock_mode }}'

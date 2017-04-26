@@ -6,3 +6,7 @@
   with_items:
   - '{{ mariadb_package_names }}'
   - '{% if mariadb_install_python_package | default(false) %}{{ mariadb_python_package_name }}{% else %}[]{% endif %}'
+  - '{% if mariadb_cluster %}{{ mariadb_cluster_package_names }}{% else %}[]{% endif %}'
+  notify:
+  - create mariadb cluster
+  - restart mariadb

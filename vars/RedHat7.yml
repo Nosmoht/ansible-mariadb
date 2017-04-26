@@ -4,7 +4,9 @@ mariadb_repository_template_file: MariaDB.repo.j2
 mariadb_repository_file_name: MariaDB.repo
 mariadb_package_names:
 - mariadb-server
+mariadb_cluster_package_names:
+- galera
 mariadb_service_name: mariadb
-mariadb_config_file_path: /etc
-mariadb_config_file_name: my.cnf
+mariadb_config_file_path: /etc/my.cnf.d
+mariadb_config_file_name: server.cnf
 mariadb_python_package_name: MySQL-python

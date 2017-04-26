@@ -10,7 +10,7 @@
   copy:
     src: '{{ item.src }}'
     dest: '{{ item.target }}'
-  when: '"{{ item.state | default("present") }}" == "import"'
+  when: item.state | default("present") == "import"
   with_items: '{{ mariadb_dbs }}'
 
 - name: Ensure database import

@@ -1,4 +1,8 @@
 ---
+- name: create mariadb cluster
+  command: galera_new_cluster
+  when: mariadb_cluster and inventory_hostname == mariadb_cluster_nodes[0]
+
 - name: start mariadb
   service:
     name: '{{ mariadb_service_name }}'
